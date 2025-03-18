@@ -17,9 +17,35 @@ const cars = [
   { id: 2, brand: "KIA", color: "Branco", km: 200000 },
   { id: 3, brand: "Renault", color: "Azul", km: 32000 },
 ]
+// 12 - Fragments
+import Fragment from './components/Fragment'
+
+// 13 - children
+import Container from './components/Container'
+
+// 14 - funcao em prop
+import ExecuteFunction from './components/ExecuteFunction'
+import { useState } from 'react'
+
+// 15 - State lift
+import Message from './components/Message'
+
+import ChangeMessage from './components/ChangeMessage'
+
 
 function App() {
-  return (
+    // 14 - funcao em prop
+    function showMessage() {
+      console.log("Evento do componente pai")
+    }
+    
+    // 15 - State lift
+    const [message, setMessage] = useState("")
+
+    const handleMessage = (msg) => {
+      setMessage(msg);
+    }
+   return (
     <>
       <div className='App' style={{paddingBottom: "500px"}}>
       <h1>Avançando em react</h1>
@@ -43,6 +69,23 @@ function App() {
       {cars.map((car) => (
         <CarDetails key={car.id} brand={car.brand} color={car.color} km={car.km}/>
       ))}
+      {/* 12 - Fragment */}
+      <Fragment />
+      {/* 13 - children */}
+      <Container>
+        <p>Alguma coisa</p>
+      </Container>
+      <Container>
+        <div>
+          <h2>Teste</h2>
+          <p>Meu container</p>
+        </div>
+      </Container>
+      {/* 14 - Funcao em prop */}
+      <ExecuteFunction myfunction={showMessage}/>
+      {/* 15 - state lift */}
+      <Message msg={message}/>
+      <ChangeMessage handleMessage={handleMessage}/>
       </div>
     </>
   )
